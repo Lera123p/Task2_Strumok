@@ -99,3 +99,5 @@ class Strumok:
         
         self.change_state(is_mixing=False)
         return z
+
+
