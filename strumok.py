@@ -60,12 +60,12 @@ class Strumok:
         self.s[14] = key[1]
         self.s[15] = invert(key[0])
         
-        for i in range(32):
+        for _ in range(32):
             self.change_state(is_mixing=True)
             
         self.change_state(is_mixing=False)
 
-    def init_512(self, key, IV):
+  def init_512(self, key, IV):
         self.r1 = 0
         self.r2 = 0
         
@@ -87,7 +87,7 @@ class Strumok:
         self.s[14] = key[1]
         self.s[15] = invert(key[0])
         
-        for i in range(32):
+        for _ in range(32):
             self.change_state(is_mixing=True)
             
         self.change_state(is_mixing=False)
