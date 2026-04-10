@@ -12,9 +12,9 @@ def testing_speed(cypher, name):
     end = time.time()
     
     seconds = end - start
-    megabytes = (500000 * 8) / 1048576 # 1 bit = 8 bytes, 1 megabyte = 1048575 bytes 
+    megabytes = (500000 * 8) / 1048576 # 1 byte = 8 bites, 1 megabyte = 1048575 bytes 
     
-    print(f"Speed results: {megabytes / seconds:.2f} Mb/s")
+    print(f"Speed results: {megabytes / seconds:.2f} MB/s")
 
 
 if __name__ == "__main__":
