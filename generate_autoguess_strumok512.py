@@ -9,24 +9,21 @@ def strumok512(T=11):
     eqs += 'connection relations\n'
 
     for t in range(T):
-        # r2_{t+1} = T(r1_t)
-        eqs += f'R2_{t + 1}, R1_{t}\n'
+        # 7.3 | 4. Оновлюють значення 16-ї комірки РЗЛЗЗ. Якщо встановлено звичайний режим функції Next, значення цієї комірки обчислюють за правилом:
+        eqs += f"S_{t+16}, S_{t+13}, S_{t+11}, S_{t}\n"
 
-        # r1_{t+1} = r2_t + s13_t
-        eqs += f'R1_{t + 1}, R2_{t}, S_{t}_13\n'
+        # 7.3 Функція наступного стану Next (1) 
+        eqs += f"R2_{t+1}, R1_{t}\n"
 
-        # a_mul(s0_t)
-        eqs += f'A0_{t}, S_{t}_0\n'
+        # 7.3 Функція наступного стану Next (2) 
+        eqs += f"R1_{t+1}, R2_{t}, S_{t+13}\n"
 
-        # ainv_mul(s11_t)
-        eqs += f'B11_{t}, S_{t}_11\n'
-
-        # new s15
-        eqs += f'S_{t + 1}_15, A0_{t}, B11_{t}, S_{t}_13\n'
-
-        # shift
-        for i in range(15):
-            eqs += f'S_{t + 1}_{i}, S_{t}_{i + 1}\n'
+        # 7.4 Функція ключового потоку Strm
+        eqs += f"S_{t+15}, R1_{t}, R2_{t}, S_{t}\n" # Z_{t}, 
+ 
+    # eqs += "known\n"
+    # for t in range(T):
+    #     eqs += f"Z_{t}\n"
 
     eqs += 'end'
 
