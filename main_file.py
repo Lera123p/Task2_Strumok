@@ -1,23 +1,32 @@
+import time
 from utils import loading_strumok_tables
 from strumok import Strumok
 
-
-#Check if everything is okey
-if __name__ == "__main__":
-    print("Loading data from teacher...")
-    my_tables = loading_strumok_tables("strumok_tables.c")
+def testing_speed(cypher, name):
+    print(f"Starting of test speed {name}...")
     
-    if my_tables:
-        new_cypher_machine = Strumok(my_tables)
-        test_key = [0, 0, 0, 0x8000000000000000]
-        test_iv  = [0, 0, 0, 0]
+    start = time.time()
+    for i in range(500000):
+        cypher.get_number64()
+    
+    end = time.time()
+    
+    seconds = end - start
+    megabytes = (500000 * 8) / 1048576 # 1 bit = 8 bytes, 1 megabyte = 1048575 bytes 
+    
+    print(f"Speed results: {megabytes / seconds:.2f} Mb/s")
+
+
+if __name__ == "__main__":
+    tables = loading_strumok_tables("strumok_tables.c")
+    
+    if tables:
+        # Струмок-256
+        c_256 = Strumok(tables)
+        c_256.init_256([0, 0, 0, 0], [0, 0, 0, 0])
+        testing_speed(c_256, "Струмок-256")
         
-        print("Warming up...32 revs...")
-        new_cypher_machine.init_256(test_key, test_iv)
-        
-        print("Results:")
-        for i in range(10):
-            z_result = new_cypher_machine.get_number64()
-            print(f"Z_{i}: {z_result:016x}")
-            
-        print("Everything is okey!")
+        # Струмок-512
+        c_512 = Strumok(tables)
+        c_512.init_512([0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0])
+        testing_speed(c_512, "Струмок-512")
