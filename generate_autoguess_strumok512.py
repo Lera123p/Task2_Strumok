@@ -1,4 +1,5 @@
 import os
+import sys
 # example: https://github.com/hadipourh/autoguess/blob/main/ciphers/SNOW2/snow2_v0.py
 
 output_dir = os.path.curdir
@@ -27,12 +28,16 @@ def strumok512(T=11):
 
     eqs += 'end'
 
-    eqsfile_path = os.path.join(output_dir, 'relationfile_strumok512_11clk.txt')
+    eqsfile_path = os.path.join(output_dir, f'relationfile_strumok512_{T}clk.txt')
     with open(eqsfile_path, 'w') as relation_file:
         relation_file.write(eqs)
 
 def main():
-    strumok512(T=11)
+    T = 11
+    if len(sys.argv) > :1
+        T = int(sys.argv[1])
+
+    strumok512(T=T)
 
 if __name__ == '__main__':
     main()
