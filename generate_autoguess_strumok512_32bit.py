@@ -2,7 +2,7 @@ import os
 import sys
 # example: https://github.com/hadipourh/autoguess/blob/main/ciphers/SNOW2/snow2_v0.py
 
-output_dir = os.path.join(os.path.curdir, 'results')
+output_dir = os.path.join(os.path.curdir, 'relations')
 
 def part(name, t, i):
     return f"{name}_{t}_{i}"

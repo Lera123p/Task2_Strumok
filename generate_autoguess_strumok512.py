@@ -2,7 +2,7 @@ import os
 import sys
 # example: https://github.com/hadipourh/autoguess/blob/main/ciphers/SNOW2/snow2_v0.py
 
-output_dir = os.path.curdir
+output_dir = os.path.join(os.path.curdir, 'relations')
 
 def strumok512(T=11):
     cipher_name = 'strumok512'
